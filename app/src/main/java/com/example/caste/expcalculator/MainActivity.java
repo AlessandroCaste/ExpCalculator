@@ -52,19 +52,21 @@ public class MainActivity extends AppCompatActivity {
             //Parsing dei dati
             int numeroParsed = 0;
             int livelloParsed = 0;
-            if(!numero.getText().toString().equals(""))
+            try {
                 numeroParsed = Integer.parseInt(numero.getText().toString());
-            if(!livello.getText().toString().equals(""))
                 livelloParsed = Integer.parseInt(livello.getText().toString());
-            boolean check = (numeroParsed > 0) && (livelloParsed <= 20) && (livelloParsed > 0);
+                boolean check = (numeroParsed > 0) && (livelloParsed <= 20) && (livelloParsed > 0);
 
-            //Calcolo i valori e setto!
-            if (check) {
-                facile.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][0]));
-                medio.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][1]));
-                difficile.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][2]));
-                mortale.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][3]));
-            } else
+                if (check) {
+                    facile.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][0]));
+                    medio.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][1]));
+                    difficile.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][2]));
+                    mortale.setText(Integer.toString(numeroParsed * matrice[(livelloParsed - 1)][3]));
+                } else
+                    throw new NumberFormatException();
+            } catch (NumberFormatException e) {
                 Toast.makeText(getApplicationContext(), "Invalid input!", Toast.LENGTH_SHORT).show();
+            }
         }
+        
 }
